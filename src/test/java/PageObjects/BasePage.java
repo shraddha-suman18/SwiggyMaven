@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -12,9 +13,17 @@ public class BasePage {
     public static WebDriverWait wait;
 
      BasePage(){
-        System.setProperty("webdriver.chrome.driver","src/test/resources/chromedriver");
-        if(driver==null){
-            driver =  new ChromeDriver();
+         if(driver==null){
+             String browserName=System.getProperty("browser");
+             if(browserName==null && browserName.equals("chrome")){
+                 System.setProperty("webdriver.chrome.driver","src/test/resources/Drivers/chromedriver");
+                 driver =  new ChromeDriver();
+             }
+             else if(browserName.equals("firefox")){
+                 System.setProperty("webdriver.gecko.driver","src/test/resources/Drivers/geckodriver");
+                 driver =  new FirefoxDriver();
+             }
+
             driver.manage().window().maximize();
         }
         wait =  new WebDriverWait(driver,30);

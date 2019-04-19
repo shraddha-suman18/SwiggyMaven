@@ -47,14 +47,15 @@ public class HomePage extends BasePage {
         WebElement addElement = driver.findElement(By.xpath(xpathOfItem+"//div[contains(text(),\"ADD\")]"));
         addElement.click();
         waiForElementToHaveText(driver.findElement(By.xpath(xpathOfItem+"//div[4]")), Integer.toString(1));
-        waitForCountTObeUpdated(xpathOfItem);
+        waitForCountTObeUpdated(xpathOfItem); //wait for the add item to save
         ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, 0);");
 
         for(int addCount=1;addCount<count;addCount++){
-            waitForCountTObeUpdated(xpathOfItem);
+            waitForCountTObeUpdated(xpathOfItem); //wait for the add item to save
             WebElement addButton = waitForElementToBeClickable(By.xpath(xpathOfItem+"//div[contains(text(),\"+\")]"));
             addButton.click();
             waiForElementToHaveText(driver.findElement(By.xpath(xpathOfItem+"//div[4]")), Integer.toString(addCount+1));
+            waitForCountTObeUpdated(xpathOfItem); //wait for the add item to save
 
         }
     }
