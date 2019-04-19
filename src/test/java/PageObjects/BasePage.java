@@ -9,12 +9,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage {
     public static WebDriver driver;
-    public WebDriverWait wait;
+    public static WebDriverWait wait;
 
      BasePage(){
         System.setProperty("webdriver.chrome.driver","src/test/resources/chromedriver");
-        driver =  new ChromeDriver();
-        driver.manage().window().maximize();
+        if(driver==null){
+            driver =  new ChromeDriver();
+            driver.manage().window().maximize();
+        }
         wait =  new WebDriverWait(driver,30);
     }
 
@@ -32,7 +34,5 @@ public class BasePage {
          waitForElementToBeVisible(elementLocator);
          return wait.until(ExpectedConditions.elementToBeClickable(elementLocator));
     }
-
-
 
 }

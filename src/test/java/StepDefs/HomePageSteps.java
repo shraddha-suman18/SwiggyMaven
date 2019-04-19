@@ -3,6 +3,7 @@ import PageObjects.BasePage;
 import PageObjects.HomePage;
 import cucumber.api.DataTable;
 import cucumber.api.java.After;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 
@@ -25,14 +26,19 @@ public class HomePageSteps {
     }
 
     @When("^I add following items to my cart$")
-    public void iAddItemsToCart(DataTable table){
+    public void iAddItemsToCart(DataTable table) throws  InterruptedException{
         homepage.addToCart(table);
+    }
+
+    @And("^I checkout$")
+    public void iCheckout(){
+        homepage.checkout();
     }
 
     @After
     public void cleanUp(){
         if(BasePage.driver!=null){
-            BasePage.driver.close();
+//            BasePage.driver.close();
 
 
 
