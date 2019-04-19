@@ -32,4 +32,26 @@ public class CheckoutPage extends BasePage {
 
     }
 
+    public void signUp(DataTable table){
+        driver.findElement(By.xpath(".//div[contains(text(),\"SIGN UP\")]")).click();
+        List<String> list = table.asList(String.class);
+        //todo:table can be better handled using class
+        waitForElementToBeClickable(By.id("mobile")).sendKeys(list.get(7));
+        driver.findElement(By.id("name")).sendKeys(list.get(6));
+        driver.findElement(By.id("email")).sendKeys(list.get(8));
+        driver.findElement(By.id("password")).sendKeys(list.get(9));
+        if(list.get(10).equals("true")){
+            driver.findElement(By.xpath(".//div[contains(text(),\"Have a referral code?\")]")).click();
+            driver.findElement(By.id("referral")).sendKeys(list.get(11));
+        }
+        waitForElementToBeClickable(By.xpath(".//form//a[contains(text(),\"CONTINUE\")]")).click();
+
+    }
+
+    public void verifySignUperror(String expectedMessage){
+        wait.until(ExpectedConditions.textToBePresentInElement(driver.findElement(By.xpath(".//label[@for=\"email\"]")),expectedMessage));
+        String actualMessage= waitForElementToBeVisible(By.xpath(".//label[@for=\"email\"]")).getText();
+        assertEquals(expectedMessage, actualMessage);
+    }
+
 }

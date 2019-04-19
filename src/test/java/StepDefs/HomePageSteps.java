@@ -35,13 +35,6 @@ public class HomePageSteps {
         homepage.checkout();
     }
 
-    @After
-    public void cleanUp(){
-        if(BasePage.driver!=null){
-            BasePage.driver.close();
 
 
-
-        }
-    }
 }

@@ -14,3 +14,7 @@ Feature: Adding and modifying items to swiggy cart
       | itemName           | count |
       | Red Velvet Cupcake | 2     |
       | Tiramisu  Cupcake  | 2     |
+    And I sign up with following details
+      | name    | phone number | email       | password | referral | referral code |
+      | abc abc | 0000000000   | abc@def.com | abcdefgh | true     |               |
+    Then I should see message Invalid email address
