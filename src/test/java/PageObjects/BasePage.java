@@ -15,7 +15,7 @@ public class BasePage {
      BasePage(){
          if(driver==null){
              String browserName=System.getProperty("browser");
-             if(browserName==null && browserName.equals("chrome")){
+             if(browserName==null || browserName.equals("chrome")){
                  System.setProperty("webdriver.chrome.driver","src/test/resources/Drivers/chromedriver");
                  driver =  new ChromeDriver();
              }
